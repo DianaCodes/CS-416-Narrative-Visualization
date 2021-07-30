@@ -1,0 +1,19 @@
+<html>
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<script type="text/javascript" src="main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link href="main.css" rel="stylesheet" type="text/css" />
+<body onload='init()'>
+<div>
+    <h1>Average MPG For Different Car Makes</h1>
+    <div class="guide">Guide:<br>Hover over a circle to view Make<br>Click on a circle to view additional details</div>
+</div>
+<div class="container">
+    <svg class="main-chart" width=700 height=800></svg>
+    <div class="pop-up" width=400 height=400></div>
+    <svg class="legend" width=400 height=300></svg>
+</div>
+</body>
+</html>

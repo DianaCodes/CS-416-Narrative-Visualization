@@ -1,0 +1,70 @@
+h1 {
+    display: block;
+    margin-top: 2em;
+    margin-left: 3em;
+}
+
+.pop-up {
+    border: 2px solid black;
+    background: lightgrey;
+    padding: 20px 20px;
+    display: none;
+    margin-right: 5em;
+    position: absolute;
+    margin-top: 4em;
+}
+
+.pop-up-header {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.cir:hover,
+.close:hover {
+    cursor: pointer;
+}
+
+.tooltip {	
+    display: inline-block;
+    position: absolute;			
+    text-align: center;			
+    width: 150px;					
+    height: 25px;					
+    padding: 2px;	
+    text-align: left;			
+    font: 12px sans-serif;		
+    background: lightsteelblue;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;			
+}
+
+.main-chart {
+    display: inline-block;
+    margin-left: 2em;
+}
+
+.axis-label, .legend-label {
+    fill: #635F5D;
+    font-size: 50pt;
+    font-family: sans-serif;
+}
+
+.legend {
+    position: absolute;
+    margin-top: 25em;
+}
+
+.pop-up,
+.legend {
+    margin-left: 15em;
+}
+
+.guide {
+    width: 300px;
+    margin-left: 75%;
+    position: absolute;
+    margin-top: -5em;
+    background-color: mediumorchid;
+    padding: 10;
+}

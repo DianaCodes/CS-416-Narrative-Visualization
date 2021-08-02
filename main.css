@@ -21,7 +21,9 @@ h1 {
 }
 
 .cir:hover,
-.close:hover {
+.close:hover,
+.second-chart:hover,
+.third-chart:hover {
     cursor: pointer;
 }
 

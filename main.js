@@ -148,6 +148,20 @@ async function init() {
                 .append('g')
                 .attr("transform", "translate(50,50)")
                 .attr('fill', colorScale(colorValue(d)))
+                .on("mouseover", function() {	
+                    div.selectAll("*").remove();	
+                    div.transition()		
+                        .duration(200)		
+                        .style("opacity", .9);		
+                    div.text("Fuel: " + d.Fuel)
+                        .style("left", (x(500 + margin) + "px"))		
+                        .style("top", (y(d.AverageHighwayMPG) + 200) + "px");
+                })					
+                .on("mouseout", function(d) {		
+                    div.transition()		
+                        .duration(500)		
+                        .style("opacity", 0);	
+                })
                 .selectAll("rect")
                 .data(data)
                 .enter()
@@ -156,7 +170,6 @@ async function init() {
                 .attr("y", yTemp(d.AverageHighwayMPG))
                 .attr("width", xTemp.bandwidth())
                 .attr("height", height - yTemp(d.AverageHighwayMPG));
-                
 
             d3.select(".second-chart")
                 .attr("width", "300px")
@@ -201,6 +214,20 @@ async function init() {
                 .append('g')
                 .attr("transform", "translate(50,50)")
                 .attr('fill', colorScale(colorValue(d)))
+                .on("mouseover", function() {	
+                    div.selectAll("*").remove();	
+                    div.transition()		
+                        .duration(200)		
+                        .style("opacity", .9);		
+                    div.text("Fuel: " + d.Fuel)
+                        .style("left", (x(1000 + margin) + "px"))		
+                        .style("top", (y(d.AverageHighwayMPG) + 200) + "px");
+                })					
+                .on("mouseout", function(d) {		
+                    div.transition()		
+                        .duration(500)		
+                        .style("opacity", 0);	
+                })
                 .selectAll("rect")
                 .data(data)
                 .enter()
@@ -209,7 +236,7 @@ async function init() {
                 .attr("y", yTemp(d.AverageCityMPG))
                 .attr("width", xTemp.bandwidth())
                 .attr("height", height - yTemp(d.AverageCityMPG));
-
+                
             d3.select(".third-chart")
                 .attr("width", "300px")
                 .attr("height", height + 2*margin);

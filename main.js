@@ -13,11 +13,11 @@ async function init() {
         .domain([10,150])
         .range([width, 0]);
 
-    var xAxis = d3.axisBottom(x)
+    var xAxisFirst = d3.axisBottom(x)
     .tickValues([10,20,50,100])
     .tickFormat(d3.format("~s"));
 
-    var yAxis = d3.axisLeft(y)
+    var yAxisFirst = d3.axisLeft(y)
     .tickValues([10,20,50,100])
     .tickFormat(d3.format("~s"));
 
@@ -38,8 +38,9 @@ async function init() {
         .attr("class", "tooltip")				
         .style("opacity", 0);
     
+    // Chart with avg highway mpg and avg city mpg
     // Add dots
-    d3.select(".main-chart").append('g')
+    d3.select(".first-chart").append('g')
         .attr("transform", "translate(50,50)")
         .selectAll("dot")
         .data(data)
@@ -135,7 +136,112 @@ async function init() {
                 .style("color","black")
                 .style("display","block");
 
-            d3.select(".pop-up").style("display","inline-block");
+            d3.select(".pop-up").style("display","block");
+
+            d3.select(".second-chart").selectAll("*").remove();
+
+            var height = 400;
+            var xTemp = d3.scaleBand().domain([d.Make]).range([0,100]);
+            var yTemp = d3.scaleLinear().domain([0,150]).range([height,0]);
+
+            d3.select(".second-chart")
+                .append('g')
+                .attr("transform", "translate(50,50)")
+                .attr('fill', colorScale(colorValue(d)))
+                .selectAll("rect")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("x", 0)
+                .attr("y", yTemp(d.AverageHighwayMPG))
+                .attr("width", xTemp.bandwidth())
+                .attr("height", height - yTemp(d.AverageHighwayMPG));
+                
+
+            d3.select(".second-chart")
+                .attr("width", "300px")
+                .attr("height", height + 2*margin);
+
+            d3.select(".second-chart")
+                .append("g")
+                    .attr("transform", "translate(" + margin + "," + margin + ")")
+                    .call(d3.axisLeft(yTemp));
+                    
+            d3.select(".second-chart")
+                .append("g")
+                    .attr("transform", "translate(" + margin + "," + (height + margin) + ")")
+                    .call(d3.axisBottom(xTemp));
+
+            d3.select(".second-chart")
+                .append("text")
+                .attr("class", "x-label")
+                .attr("text-anchor", "end")
+                .attr("x", width - 500)
+                .attr("y", height + 100)
+                .text("Make");
+        
+            d3.select(".second-chart")
+                .append("text")
+                .attr("class", "y-label")
+                .attr("text-anchor", "end")
+                .attr("y", 0)
+                .attr("dy", ".75em")
+                .attr("transform", "translate(0,150)rotate(-90)")
+                .text("Average Hwy MPG");
+
+            d3.select(".second-chart").style("display","inline-block");
+
+            d3.select(".third-chart").selectAll("*").remove();
+
+            var height = 400;
+            var xTemp = d3.scaleBand().domain([d.Make]).range([0,100]);
+            var yTemp = d3.scaleLinear().domain([0,150]).range([height,0]);
+
+            d3.select(".third-chart")
+                .append('g')
+                .attr("transform", "translate(50,50)")
+                .attr('fill', colorScale(colorValue(d)))
+                .selectAll("rect")
+                .data(data)
+                .enter()
+                .append("rect")
+                .attr("x", 0)
+                .attr("y", yTemp(d.AverageCityMPG))
+                .attr("width", xTemp.bandwidth())
+                .attr("height", height - yTemp(d.AverageCityMPG));
+
+            d3.select(".third-chart")
+                .attr("width", "300px")
+                .attr("height", height + 2*margin);
+
+            d3.select(".third-chart")
+                .append("g")
+                    .attr("transform", "translate(" + margin + "," + margin + ")")
+                    .call(d3.axisLeft(yTemp));
+                    
+            d3.select(".third-chart")
+                .append("g")
+                    .attr("transform", "translate(" + margin + "," + (height + margin) + ")")
+                    .call(d3.axisBottom(xTemp));
+
+            d3.select(".third-chart")
+                .append("text")
+                .attr("class", "x-label")
+                .attr("text-anchor", "end")
+                .attr("x", width - 500)
+                .attr("y", height + 100)
+                .text("Make");
+        
+            d3.select(".third-chart")
+                .append("text")
+                .attr("class", "y-label")
+                .attr("text-anchor", "end")
+                .attr("y", 0)
+                .attr("dy", ".75em")
+                .attr("transform", "translate(0,150)rotate(-90)")
+                .text("Average City MPG");
+
+            d3.select(".third-chart").style("display","inline-block");
         });
     
     var uniqueKeys = [];
@@ -176,17 +282,17 @@ async function init() {
         .attr("text-anchor", "left")
         .style("alignment-baseline", "middle");
 
-    d3.select(".main-chart")
+    d3.select(".first-chart")
         .append("g")
             .attr("transform", "translate(" + margin + "," + margin + ")")
-            .call(yAxis);
+            .call(yAxisFirst);
 
-    d3.select(".main-chart")
+    d3.select(".first-chart")
         .append("g")
             .attr("transform", "translate(" + margin + "," + (height + margin) + ")")
-            .call(xAxis);
+            .call(xAxisFirst);
     
-    d3.select(".main-chart")
+    d3.select(".first-chart")
         .append("text")
         .attr("class", "x-label")
         .attr("text-anchor", "end")
@@ -194,12 +300,12 @@ async function init() {
         .attr("y", height + 100)
         .text("Average City MPG");
 
-    d3.select(".main-chart")
+    d3.select(".first-chart")
         .append("text")
         .attr("class", "y-label")
         .attr("text-anchor", "end")
         .attr("y", 0)
         .attr("dy", ".75em")
         .attr("transform", "translate(0,150)rotate(-90)")
-        .text("Average Hightway MPG");
+        .text("Average Highway MPG");
 }
